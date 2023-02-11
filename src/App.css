@@ -1,0 +1,107 @@
+.App {
+  text-align: center;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 550px;
+  margin: auto;
+
+
+}
+
+/* header */
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 550px;
+  height: 65px;
+  margin: auto;
+  background: linear-gradient(90deg, #672280 1.18%, #a626d3 100%);
+}
+
+header .content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  width: 90%;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  width: 20px;
+  height: 20px;
+  padding-right: 10px;
+}
+
+.logo h1 {
+  font-weight: 700;
+  font-size: 20.7482px;
+  line-height: 24px;
+  letter-spacing: -0.1em;
+}
+
+.right-text {
+  width: 189px;
+}
+
+/*Mems Generate*/
+.form {
+  display: grid;
+  grid-template: 40px 40px /1fr 1fr;
+  gap: 20px;
+  padding: 20px;
+
+}
+
+.form--input {
+  border-radius: 5px;
+  border: 1px solid #d5d4d8;
+  text-indent: 10px;
+}
+
+.form--buttom {
+  grid-column: 1/-1;
+  cursor: pointer;
+  background: linear-gradient(90deg, #672280 1.18%, #a626d3 100%);
+  color: white;
+  border: none;
+}
+
+.mems {
+  position: relative;
+  width: 508px;
+  height: fit-content;
+  grid-column: 1/-1;
+  color: white;
+  font-size: 22px;
+}
+
+.mems--image {
+
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 15px;
+}
+
+.top-txt {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bottom-txt {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+}
