@@ -1,6 +1,7 @@
 import "./App.css";
 import Header from "./components/header";
 import Meme from "./components/Mems";
+import StarWar from "./components/StarWarApi";
 
 function App ()
 {

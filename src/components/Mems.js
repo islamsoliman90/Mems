@@ -1,37 +1,58 @@
-import React from 'react';
-import Data from '../memsData';
+import React, { useEffect } from 'react';
 export default function Mems ()
 {
-    let [ memeImage, setMemeImage ] = React.useState( Data.mems[ 0 ].url );
-    let [ memeTxtTop, setMemeTxtTop ] = React.useState( Data.mems[ 0 ].topText );
-    let [ memeTxtBottom, setMemeTxtBttom ] = React.useState( Data.mems[ 0 ].bottomText );
+    let [ memsData, setMemsData ] = React.useState(
+        {
+            "url": "",
+            "topText": "",
+            "bottomText": ""
+        }
+    );
+    let [ apiMems, setApiMems ] = React.useState( [] );
+    useEffect( () =>
+    {
+        fetch( "https://api.imgflip.com/get_memes" )
+            .then( res => res.json() )
+            .then( res => res.data.memes )
+            .then( data => setApiMems( data ) );
+
+    }, [] );
+    console.log( apiMems.length );
+
     function generateMeme ()
     {
-
-        let random = Math.floor( Math.random() * Data.mems.length );
-        setMemeImage( () =>
+        setMemsData( ( update ) =>
         {
-            return Data.mems[ random ].url;
-        } );
-        setMemeTxtTop( () =>
-        {
-            return Data.mems[ random ].topText;
-        } );
-        setMemeTxtBttom( () =>
-        {
-            return Data.mems[ random ].bottomText;
+            let random = Math.floor( Math.random() * apiMems.length );
+            let img = apiMems[ random ].url;
+            console.log( img );
+            return {
+                ...update,
+                url: img
+            };
         } );
     }
-    let image = `../img/${ memeImage }.jpg`;
+    let image = memsData.url;
+    function handlyInput ( event )
+    {
+        setMemsData( ( update ) =>
+        {
+            let { name, value } = event.target;
+            return {
+                ...update,
+                [ name ]: value
+            };
+        } );
+    }
     return (
         <div className="form">
-            <input type="text" className="form--input toptxt" placeholder="top-mems" />
-            <input type="text" className="form--input bottomtxt" placeholder="bottem-mems" />
+            <input type="text" className="form--input toptxt" placeholder="top-mems" name='topText' value={ memsData.topText } onChange={ handlyInput } />
+            <input type="text" className="form--input bottomtxt" placeholder="bottem-mems" name='bottomText' value={ memsData.bottomText } onChange={ handlyInput } />
             <button className="form--buttom" onClick={ generateMeme }>Get a new meme image  🖼</button>
             <div className="mems">
-                <img className='mems--image' src={ image } />
-                <h2 className='top-txt'>{ memeTxtTop }</h2>
-                <h2 className='bottom-txt'>{ memeTxtBottom }</h2>
+                { memsData.url !== "" && <img className='mems--image' src={ image } /> }
+                <h2 className='top-txt'>{ memsData.topText }</h2>
+                <h2 className='bottom-txt'>{ memsData.bottomText }</h2>
             </div>
         </div>
     );
